@@ -12,7 +12,7 @@ export class GameManagerService {
 
   private game: Game = new Game([]);
   private playerList: Player[] = [];
-  private matchUpSize: number = 4;
+  private matchUpSize: number = 2;
   private amountOfMatches: number = 2;
   private shouldCalculateAmountOfMatches: boolean = false;
   private currentRound: number = 0;
