@@ -1,0 +1,47 @@
+
+<!--@if (canGenerateMatchUp) {-->
+<!--  <div class="pre-game-message">-->
+<!--    <button (click)="generateMatchUp()">Generate MatchUps</button>-->
+<!--  </div>-->
+<!--} @else {-->
+<!--  <p>Bitte fügen Sie ein paar Spieler hinzu!</p>-->
+<!--}-->
+
+@if (matchUpList.length) {
+  <table style="border: 1px solid gray">
+    <thead>
+    <tr>
+      @for (_player of matchUpList[0].players; track $index) {
+        <th>Player</th>
+        <th>Points<br> (wins/loses/ties)</th>
+        @if ($index + 1 !== matchUpSize) {
+          <th></th>
+        }
+      }
+    </tr>
+    </thead>
+    <tbody>
+      @for (playerList of matchUpList; track $index) {
+        <tr>
+          @for (player of playerList.players; track $index) {
+            <td [class]=`player-status-${player.state}` (dblclick)="processMatchResult(player.id, playerList)">{{ player.name }}</td>
+            <td [class]=`player-status-${player.state}` (dblclick)="processMatchResult(player.id, playerList)">{{ player.points.wins }}/{{ player.points.loses }}/{{ player.points.ties }}</td>
+            @if ($index + 1 !== matchUpSize) {
+              <td><b>VS.</b></td>
+            }
+            @if ($index + 1 === matchUpSize) {
+              <td><button (click)="tiePlayers(playerList.players)">Tie</button></td>
+              <td><button (click)="resetPlayers(playerList.players)">Reset</button></td>
+            }
+          }
+
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+<span class="round-controls">
+    <button (click)="finishRound()" [disabled]="!validatePlayers()">Finish round</button>
+</span>
+

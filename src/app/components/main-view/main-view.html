@@ -1,0 +1,37 @@
+<div class="main">
+  <section  class="controls">
+    <app-controll-panel [isDisabled]="gameHasStarted()"></app-controll-panel>
+  </section>
+  <aside class="players-tab">
+    <app-player-list [isDisabled]="gameHasStarted()"></app-player-list>
+  </aside>
+  <main class="match-ups">
+    <h1>Alle MatchUps werden hier angezeigt</h1>
+
+    @for(round of roundList; track $index) {
+      @if (round.status !== RoundStatus.WAITING_TO_START) {
+
+        <span>round <b>{{round.roundId}}</b></span>
+        @if (round.status === RoundStatus.RUNNING) {
+          <div [class]="`round-status-${round.status}`">
+            <app-match-up-table  [matchUpList]="round.matchUpList" [round]="$index + 1" [roundStatus]="round.status"></app-match-up-table>
+          </div>
+        }
+        @if (round.status === RoundStatus.FINISHED) {
+          <div [class]="`round-status-${round.status}`">
+            <app-finished-match-up-table [matchUpList]="round.matchUpList"></app-finished-match-up-table>
+          </div>
+        }
+
+        <hr>
+      }
+    }
+  </main>
+
+  <section class="start-section">
+    @if (!gameHasStarted()){
+      <button [disabled]="gameManagerService.getPlayers().length < 3" (click)="startGame()">Spiel Starten!</button>
+      {{gameManagerService.getAmountOfMatches()}}
+    }
+  </section>
+</div>
