@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {Player} from './model/player';
 import {MainView} from './components/main-view/main-view';
 
 @Component({
@@ -10,6 +9,5 @@ import {MainView} from './components/main-view/main-view';
 })
 export class App {
 
-  playerList: Player[] = [];
 
 }

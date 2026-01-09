@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "menagmentStuffProjekt": {
+    "AngularTurnamentManagmentSystem": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "menagmentStuffProjekt:build:production"
+              "buildTarget": "AngularTurnamentManagmentSystem:build:production"
             },
             "development": {
-              "buildTarget": "menagmentStuffProjekt:build:development"
+              "buildTarget": "AngularTurnamentManagmentSystem:build:development"
             }
           },
           "defaultConfiguration": "development"
