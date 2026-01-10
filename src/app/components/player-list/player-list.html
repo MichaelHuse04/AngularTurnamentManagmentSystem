@@ -1,15 +1,17 @@
+<button (click)="hidePlayerList.emit()">X</button>
 <h1>Spielerliste</h1>
-<input id="add-player-input" name="add-player-input" #addPlayerInput (keyup.enter)="addPlayer(addPlayerInput.value,  addPlayerInput)">
-<button  (click)="addPlayer(addPlayerInput.value, addPlayerInput)">Add Player</button>
+<input id="add-player-input" name="add-player-input" #addPlayerInput
+       (keyup.enter)="addPlayer(addPlayerInput.value,  addPlayerInput)">
+<button (click)="addPlayer(addPlayerInput.value, addPlayerInput)">Add Player</button>
 
-<p>Spieler anzahl: <b>{{playerCount}}</b></p>
+<p>Spieler anzahl: <b>{{ playerCount }}</b></p>
 
 @if (playerCount === 0) {
-  <button (click)="addMockPlayer()">add mock players</button>
+    <button (click)="addMockPlayer()">add mock players</button>
 }
 
 <ul>
-  @for (player of this.playerList; track $index) {
-    <li (click)="removePlayer($index)">{{player.name}}</li>
-  }
+    @for (player of this.playerList; track $index) {
+        <li (click)="removePlayer($index)">{{ player.name }}</li>
+    }
 </ul>

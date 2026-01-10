@@ -13,3 +13,17 @@
 tr{
   user-select: none;
 }
+
+
+td{
+    border: 2px solid gray;
+}
+
+th{
+    border: 2px solid gray;
+}
+
+table{
+    background-color: gainsboro;
+    border: 1px solid gray;
+}

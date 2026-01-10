@@ -27,14 +27,10 @@ export class MatchUpTable {
   }
 
 
-  startNextRound(): void {
-    this.gameManagerService.startNextRound();
-  }
-
-
 
   finishRound(): void {
-    this.gameManagerService.markRoundAsFinished(this.round - 1);
+    this.gameManagerService.setRoundStatus(this.round - 1, RoundStatus.FINISHED);
+    this.gameManagerService.startNextRound(this.round);
   }
 
   processMatchResult( wonPlayerId: Uuid, matchUp: MatchUp): void {

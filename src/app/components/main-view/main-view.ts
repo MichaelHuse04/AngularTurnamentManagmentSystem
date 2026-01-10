@@ -7,42 +7,42 @@ import {Round, RoundStatus} from '../../model/round';
 import {FinishedMatchUpTable} from '../match-up-table/finished-match-up-table/finished-match-up-table';
 
 @Component({
-  selector: 'app-main-view',
-  imports: [
-    PlayerList,
-    MatchUpTable,
-    ControllPanel,
-    FinishedMatchUpTable
-  ],
-  templateUrl: './main-view.html',
-  styleUrl: './main-view.css',
+    selector: 'app-main-view',
+    imports: [
+        PlayerList,
+        MatchUpTable,
+        ControllPanel,
+        FinishedMatchUpTable
+    ],
+    templateUrl: './main-view.html',
+    styleUrl: './main-view.css',
 })
 export class MainView {
 
-  protected readonly RoundStatus = RoundStatus;
-  gameManagerService = inject(GameManagerService);
+    protected readonly RoundStatus = RoundStatus;
+    gameManagerService = inject(GameManagerService);
+    showPlayerList = true;
 
+    startGame(): void {
+        this.gameManagerService.startGame();
+    }
 
-  startGame(): void {
-    this.gameManagerService.startGame();
-  }
+    gameHasStarted() {
+        return this.gameManagerService.gameHasStarted()
+    }
 
-  gameHasStarted() {
-    return this.gameManagerService.gameHasStarted()
-  }
+    get roundList(): Round[] {
+        return this.gameManagerService.getRoundList();
+    }
 
-  get roundList(): Round[] {
-    return this.gameManagerService.getRoundList();
-  }
+    // get matchUps(): MatchUp[] {}
 
-  // get matchUps(): MatchUp[] {}
+    // get matchUpCount(): number {
+    //   return this.gameManagerService.getAllMatchUpForRound().length;
+    // }
 
-  // get matchUpCount(): number {
-  //   return this.gameManagerService.getAllMatchUpForRound().length;
-  // }
-
-  constructor(gameManagerService: GameManagerService) {
-    this.gameManagerService = gameManagerService;
-  }
+    constructor(gameManagerService: GameManagerService) {
+        this.gameManagerService = gameManagerService;
+    }
 
 }

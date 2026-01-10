@@ -1,15 +1,27 @@
 .player-status-won {
-  background-color: #c0ef83;
+    background-color: #c0ef83;
 }
 
 .player-status-lost {
-  background-color: #fb9393;
+    background-color: #fb9393;
 }
 
 .player-status-tie {
-  background-color: #ffffae;
+    background-color: #ffffae;
 }
 
-tr{
-  user-select: none;
+tr {
+    user-select: none;
+}
+
+.table-item{
+    border: 2px solid gray;
+}
+
+.table-header{
+    border: 2px solid gray;
+}
+
+table{
+    border: 1px solid gray;
 }

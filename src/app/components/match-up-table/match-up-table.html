@@ -8,12 +8,12 @@
 <!--}-->
 
 @if (matchUpList.length) {
-  <table style="border: 1px solid gray">
+  <table>
     <thead>
     <tr>
       @for (_player of matchUpList[0].players; track $index) {
-        <th>Player</th>
-        <th>Points<br> (wins/loses/ties)</th>
+        <th class="table-header">Player</th>
+        <th class="table-header">Points<br> (wins/loses/ties)</th>
         @if ($index + 1 !== matchUpSize) {
           <th></th>
         }
@@ -24,8 +24,8 @@
       @for (playerList of matchUpList; track $index) {
         <tr>
           @for (player of playerList.players; track $index) {
-            <td [class]=`player-status-${player.state}` (dblclick)="processMatchResult(player.id, playerList)">{{ player.name }}</td>
-            <td [class]=`player-status-${player.state}` (dblclick)="processMatchResult(player.id, playerList)">{{ player.points.wins }}/{{ player.points.loses }}/{{ player.points.ties }}</td>
+            <td [class]="`player-status-${player.state} ` + 'table-item'" (click)="processMatchResult(player.id, playerList)">{{ player.name }}</td>
+            <td [class]="`player-status-${player.state} ` + 'table-item'" (click)="processMatchResult(player.id, playerList)">{{ player.points.wins }}/{{ player.points.loses }}/{{ player.points.ties }}</td>
             @if ($index + 1 !== matchUpSize) {
               <td><b>VS.</b></td>
             }

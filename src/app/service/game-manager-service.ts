@@ -32,11 +32,18 @@ export class GameManagerService {
     this.generateMatchUp()
   }
 
-  startNextRound(): void {
+  backToPreviousRound(): void {
+      this.clearRound(this.currentRound - 1)
+      this.currentRound--;
+      this.game.roundList[this.currentRound - 1].status = RoundStatus.RUNNING;
+      this.revertCurrentRoundRoundResult()
+  }
+
+  startNextRound(currentRound: number): void {
     this.processCurrentRoundRoundResult()
-    this.game.roundList[this.currentRound - 1] = structuredClone(this.game.roundList[this.currentRound - 1]);
-    this.currentRound++;
-    this.game.roundList[this.currentRound - 1].status = RoundStatus.RUNNING;
+    this.game.roundList[currentRound - 1] = structuredClone(this.game.roundList[currentRound - 1]);
+    this.currentRound = currentRound + 1;
+    this.game.roundList[currentRound].status = RoundStatus.RUNNING;
     this.generateMatchUp()
   }
 
@@ -57,8 +64,25 @@ export class GameManagerService {
     })
   }
 
-  markRoundAsFinished(roundIndex: number): void {
-    this.game.roundList[roundIndex].status = RoundStatus.FINISHED;
+    private revertCurrentRoundRoundResult(): void {
+        this.game.roundList[this.currentRound - 1].matchUpList.forEach((matchUp: MatchUp) => {
+
+            matchUp.players.forEach(player => {
+                if (player.state === PlayerStatus.WON) {
+                    player.points.wins--;
+                }
+                else if (player.state === PlayerStatus.LOST) {
+                    player.points.loses--;
+                }
+                else if (player.state === PlayerStatus.TIE) {
+                    player.points.ties--;
+                }
+            })
+        })
+    }
+
+  setRoundStatus(roundIndex: number, status: RoundStatus): void {
+    this.game.roundList[roundIndex].status = status;
   }
 
   getAmountOfMatches(): number {
@@ -111,6 +135,11 @@ export class GameManagerService {
       console.log(chunk);
       this.addMatchUp(this.currentRound - 1,(new MatchUp(chunk)));
     }
+  }
+
+  clearRound(roundIndex: number): void {
+      this.game.roundList[roundIndex].status = RoundStatus.WAITING_TO_START;
+      this.game.roundList[roundIndex].matchUpList = [];
   }
 
   // clearMatchUp(roundIndex:number, matchUpIndex:number) {
