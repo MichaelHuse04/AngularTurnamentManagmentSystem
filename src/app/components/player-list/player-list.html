@@ -1,8 +1,8 @@
 <button (click)="hidePlayerList.emit()">X</button>
 <h1>Spielerliste</h1>
 <input id="add-player-input" name="add-player-input" #addPlayerInput
-       (keyup.enter)="addPlayer(addPlayerInput.value,  addPlayerInput)">
-<button (click)="addPlayer(addPlayerInput.value, addPlayerInput)">Add Player</button>
+       (keyup.enter)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">
+<button (click)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">Add Player</button>
 
 <p>Spieler anzahl: <b>{{ playerCount }}</b></p>
 
@@ -12,6 +12,6 @@
 
 <ul>
     @for (player of this.playerList; track $index) {
-        <li (click)="removePlayer($index)">{{ player.name }}</li>
+        <li (click)="removePlayer($index)">{{ player.name }} ({{player.points.wins}}/{{player.points.loses}}/{{player.points.ties}}) ({{player.state}})</li>
     }
 </ul>

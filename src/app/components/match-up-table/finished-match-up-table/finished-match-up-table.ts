@@ -20,7 +20,7 @@ export class FinishedMatchUpTable {
     }
 
     backToThisRound(): void {
-        this.gameManagerService.backToPreviousRound()
+        this.gameManagerService.backToRound(this.round)
     }
 
 }

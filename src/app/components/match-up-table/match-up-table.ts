@@ -26,11 +26,8 @@ export class MatchUpTable {
     return this.gameManagerService.canGenerateMatchUp();
   }
 
-
-
   finishRound(): void {
-    this.gameManagerService.setRoundStatus(this.round - 1, RoundStatus.FINISHED);
-    this.gameManagerService.startNextRound(this.round);
+    this.gameManagerService.startNextRound();
   }
 
   processMatchResult( wonPlayerId: Uuid, matchUp: MatchUp): void {

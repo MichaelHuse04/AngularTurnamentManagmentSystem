@@ -15,8 +15,7 @@
             <tr>
                 @for (player of playerList.players; track $index) {
                     <td [class]=`player-status-${player.state}`>{{ player.name }}</td>
-                    <td [class]=`player-status-${player.state}`>{{ player.points.wins }}/{{ player.points.loses }}
-                        /{{ player.points.ties }}
+                    <td [class]=`player-status-${player.state}`>{{ player.points.wins }}/{{ player.points.loses }}/{{ player.points.ties }}
                     </td>
                     @if ($index + 1 !== matchUpSize) {
                         <td><b>VS.</b></td>
@@ -29,6 +28,7 @@
 
 @if (canBeEdited) {
 <span class="round-controls">
-    <button (click)="backToThisRound()">Go Back</button>
+<!--    <button (click)="backToThisRound()">Go Back</button>-->
+<!--    TODO: FIX DIS STUFF FIRST-->
 </span>
 }

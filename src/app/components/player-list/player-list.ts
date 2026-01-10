@@ -24,9 +24,8 @@ export class PlayerList {
         return this.gameManagerService.getPlayers();
     }
 
-    addPlayer(playerName: string, input: HTMLInputElement) {
-        if (input.value) {
-            input.value = "";
+    addPlayer(playerName: string) {
+        if (playerName.trim()) {
             this.gameManagerService.addPlayer(new Player(playerName));
         }
     }

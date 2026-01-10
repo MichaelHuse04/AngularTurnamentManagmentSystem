@@ -44,6 +44,7 @@
     </main>
 
     <section class="start-section">
+        current round {{ this.gameManagerService.currentRound }}
         @if (!gameHasStarted()) {
             <button [disabled]="gameManagerService.getPlayers().length < 3" (click)="startGame()">Spiel Starten!
             </button>
