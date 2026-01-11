@@ -51,6 +51,8 @@ export class PlayerList {
     }
 
     removePlayer(index: number) {
-        this.playerList.splice(index, 1);
+        if (!this.gameHasStarted){
+            this.playerList.splice(index, 1);
+        }
     }
 }

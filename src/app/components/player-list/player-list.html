@@ -2,7 +2,7 @@
     <span class="player-list-header">Spielerliste</span>
     <button (click)="hidePlayerList.emit()" class="hide-player-list-button"> << </button>
     <br>
-    @if (!gameHasStarted) {
+    @if (!isDisabled) {
         <input id="add-player-input" name="add-player-input" #addPlayerInput
                (keyup.enter)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">
         <button (click)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">Add Player</button>
@@ -16,7 +16,7 @@
 
     <ul>
         @for (player of this.playerList; track $index) {
-            <li (click)="removePlayer($index)">{{ player.name }} ({{player.points.wins}}/{{player.points.loses}}/{{player.points.ties}}) ({{player.state}})</li>
+            <li (click)="removePlayer($index)" [class.playerCanBeRemoved]="!isDisabled">{{ player.name }} ({{player.points.wins}}/{{player.points.loses}}/{{player.points.ties}})</li>
         }
     </ul>
 </div>
