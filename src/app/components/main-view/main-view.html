@@ -21,8 +21,8 @@
             @if (round.status !== RoundStatus.WAITING_TO_START) {
 
                 <details [open]="round.status === RoundStatus.RUNNING">
-                    <summary>round <b>{{ round.roundId }}
-                        /{{ roundList.length }}</b> {{ roundList.length - 1 === $index ? "(Letzte Runde)" : null }}
+                    <summary>round <b>
+                        {{ round.roundId }}/{{ roundList.length }}</b> {{ roundList.length - 1 === $index ? "(Letzte Runde)" : null }}
                     </summary>
                     @if (round.status === RoundStatus.RUNNING) {
                         <div [class]="`round-status-${round.status}`">
