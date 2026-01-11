@@ -1,7 +1,7 @@
 <div class="player-list-panel">
-    <button (click)="hidePlayerList.emit()" class="hide-player-list-button"> << </button>
-
     <span class="player-list-header">Spielerliste</span>
+    <button (click)="hidePlayerList.emit()" class="hide-player-list-button"> << </button>
+    <br>
     @if (!gameHasStarted) {
         <input id="add-player-input" name="add-player-input" #addPlayerInput
                (keyup.enter)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">

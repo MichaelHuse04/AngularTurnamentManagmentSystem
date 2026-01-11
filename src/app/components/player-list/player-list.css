@@ -3,8 +3,8 @@
     position: relative;
 }
 .hide-player-list-button {
-    position: absolute;
-    right: 0;
+
+    float: right;
     font-size: 3rem;
     padding: 0.5rem;
 }
