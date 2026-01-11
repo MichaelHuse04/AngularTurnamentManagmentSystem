@@ -6,14 +6,27 @@
             type="number"
             min="2"
             [value]="amountOfMatches"
-            [disabled]="calculateAmountOfMatches || gameHasStarted"
+            [disabled]="calculateAmountOfMatches || isDisabled"
             (change)="setAmountOfMatches(parseInt(roundAmountInput.value))"
             #roundAmountInput
+    >
+
+    <label for="player-per-match-up-amount-input">Anzahl an Spieler die gegeneinander spielen: </label>
+    <input
+            name="player-per-match-up-amount-input"
+            id="player-per-match-up-amount-input"
+            type="number"
+            min="2"
+            [max]="amountOfPlayers - 1"
+            [value]="amountOfPlayersPerRound"
+            [disabled]="calculateAmountOfMatches || isDisabled"
+            (change)="setPlayerPerMatchUp(parseInt(playerPerMatchUpInput.value))"
+            #playerPerMatchUpInput
     >
     <br>
     <label for="until-one-player-has-a-lead-input">Spielen bis es einen klaren Sieger gibt</label>
     <input type="checkbox" name="until-one-player-has-a-lead-input" id="until-one-player-has-a-lead-input"
            (click)="toggleRoundAmountInput()"
-           [disabled]="gameHasStarted">
+           [disabled]="isDisabled">
     <span>(doesn't work yet)</span>
 </main>

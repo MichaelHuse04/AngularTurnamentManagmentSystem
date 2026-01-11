@@ -106,8 +106,12 @@ export class GameManagerService {
         return this.amountOfMatches
     }
 
-    setAmountOfMatches(amountOfMatches: number) {
+    setAmountOfMatchUps(amountOfMatches: number) {
         this.amountOfMatches = amountOfMatches;
+    }
+
+    setPlayerPerMatchUp(playerPerMatchUp: number) {
+        this.matchUpSize = playerPerMatchUp;
     }
 
     toggleShouldCalculateAmountOfMatches() {

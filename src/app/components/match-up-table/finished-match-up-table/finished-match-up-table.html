@@ -14,12 +14,34 @@
         @for (playerList of matchUpList; track $index) {
             <tr>
                 @for (player of playerList.players; track $index) {
-                    <td [class]=`player-status-${player.state}`>{{ player.name }}</td>
-                    <td [class]=`player-status-${player.state}`>{{ player.points.wins }}/{{ player.points.loses }}/{{ player.points.ties }}
+                    <td [class]="`player-status-${player.state}`+ ' table-item'">{{ player.name }}</td>
+                    <td [class]="`player-status-${player.state}`+ ' table-item'">{{ player.points.wins }}/{{ player.points.loses }}/{{ player.points.ties }}
                     </td>
                     @if ($index + 1 !== matchUpSize) {
                         <td><b>VS.</b></td>
                     }
+
+                    @if ($last) {
+                        @for (_emptyPlayerSlot of [].constructor(matchUpSize - playerList.players.length); track $index; let emptySlotIndex = $index) {
+                            <td class="empty-player-slot"></td>
+                            <td class="empty-player-slot"></td>
+
+                            @if (emptySlotIndex + 1 !== matchUpSize - playerList.players.length) {
+                                <td><b>VS.</b></td>
+                            }
+
+                            @if (emptySlotIndex + 1 === matchUpSize - playerList.players.length) {
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+
+
+                            }
+                        }
+
+                    }
+
                 }
             </tr>
         }

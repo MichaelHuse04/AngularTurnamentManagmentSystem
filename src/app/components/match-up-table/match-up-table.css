@@ -25,3 +25,9 @@ tr {
 table{
     border: 1px solid gray;
 }
+
+.empty-player-slot{
+    background-color: #ffd059;
+    background-image: repeating-linear-gradient(-45deg, white 3px, #cda846 5px, white 7px);
+    border: solid 2px #a88839;
+}

@@ -1,4 +1,3 @@
-
 <!--@if (canGenerateMatchUp) {-->
 <!--  <div class="pre-game-message">-->
 <!--    <button (click)="generateMatchUp()">Generate MatchUps</button>-->
@@ -8,47 +7,69 @@
 <!--}-->
 
 @if (matchUpList.length) {
-  <table>
-    <thead>
-    <tr>
-      @for (_player of matchUpList[0].players; track $index) {
-        <th class="table-header">Player</th>
-        <th class="table-header">Points<br> (wins/loses/ties)</th>
-        @if ($index + 1 !== matchUpSize) {
-          <th></th>
-        }
-      }
-    </tr>
-    </thead>
-    <tbody>
-      @for (playerList of matchUpList; track $index) {
+    <table>
+        <thead>
         <tr>
-          @for (player of playerList.players; track $index) {
-            <td [class]="`player-status-${player.state} ` + 'table-item'" (click)="processMatchResult(player.id, playerList)">{{ player.name }}</td>
-            <td [class]="`player-status-${player.state} ` + 'table-item'" (click)="processMatchResult(player.id, playerList)">{{ player.points.wins }}/{{ player.points.loses }}/{{ player.points.ties }}</td>
-            @if ($index + 1 !== matchUpSize) {
-              <td><b>VS.</b></td>
+            @for (_player of matchUpList[0].players; track $index) {
+                <th class="table-header">Player</th>
+                <th class="table-header">Points<br> (wins/loses/ties)</th>
+                @if ($index + 1 !== matchUpSize) {
+                    <th></th>
+                }
             }
-              @for (_emptyPlayerSlot of [].constructor(matchUpSize - playerList.players.length); track $index){
-                <td class="empty-player-slot"></td>
-                <td class="empty-player-slot"></td>
-
-                  @if ($index + 1 === matchUpSize - playerList.players.length) {
-                      <td><button (click)="tiePlayers(playerList.players)">Tie</button></td>
-                      <td><button (click)="resetPlayers(playerList.players)">Reset</button></td>
-                  }
-              }
-
-            @if ($index + 1 === matchUpSize) {
-              <td><button (click)="tiePlayers(playerList.players)">Tie</button></td>
-              <td><button (click)="resetPlayers(playerList.players)">Reset</button></td>
-            }
-          }
-
         </tr>
-      }
-    </tbody>
-  </table>
+        </thead>
+        <tbody>
+            @for (playerList of matchUpList; track $index) {
+                <tr>
+                    @for (player of playerList.players; track $index; let playerIndex = $index;) {
+                        <td [class]="`player-status-${player.state} ` + 'table-item'"
+                            (click)="processMatchResult(player.id, playerList)">{{ player.name }}
+                        </td>
+                        <td [class]="`player-status-${player.state} ` + 'table-item'"
+                            (click)="processMatchResult(player.id, playerList)">{{ player.points.wins }}
+                            /{{ player.points.loses }}/{{ player.points.ties }}
+                        </td>
+                        @if (playerIndex + 1 !== matchUpSize) {
+                            <td><b>VS.</b></td>
+                        }
+                        @if ($last) {
+                            @for (_emptyPlayerSlot of [].constructor(matchUpSize - playerList.players.length); track $index; let emptySlotIndex = $index) {
+                                <td class="empty-player-slot"></td>
+                                <td class="empty-player-slot"></td>
+
+                                @if (emptySlotIndex + 1 !== matchUpSize - playerList.players.length) {
+                                    <td><b>VS.</b></td>
+                                }
+
+                                @if (emptySlotIndex + 1 === matchUpSize - playerList.players.length) {
+                                    <td>
+                                        <button (click)="tiePlayers(playerList.players)">Tie</button>
+                                    </td>
+                                    <td>
+                                        <button (click)="resetPlayers(playerList.players)">Reset</button>
+                                    </td>
+
+
+                                }
+                            }
+
+                        }
+
+                        @if (playerIndex + 1 === matchUpSize) {
+                            <td>
+                                <button (click)="tiePlayers(playerList.players)">Tie</button>
+                            </td>
+                            <td>
+                                <button (click)="resetPlayers(playerList.players)">Reset</button>
+                            </td>
+                        }
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 <span class="round-controls">

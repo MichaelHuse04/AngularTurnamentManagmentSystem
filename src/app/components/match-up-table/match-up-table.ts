@@ -18,6 +18,10 @@ export class MatchUpTable {
   @Input() roundStatus: RoundStatus = RoundStatus.WAITING_TO_START;
   @Input() matchUpList: MatchUp[] = []
 
+    get amountOfPlayer(): number {
+      return this.gameManagerService.getPlayers().length; // TODO
+    }
+
   get matchUpSize(): number {
     return this.gameManagerService.getMatchUpSize();
   }
@@ -55,4 +59,5 @@ export class MatchUpTable {
   }
 
 
+    protected readonly parseInt = parseInt;
 }
