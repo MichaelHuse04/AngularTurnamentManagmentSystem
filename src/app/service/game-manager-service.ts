@@ -125,13 +125,14 @@ export class GameManagerService {
     sortPlayersByPoints() {
         this.playerList = this.playerList.sort(
             (a, b) => {
-                if (b.points.wins === a.points.wins) {
-                    if (b.points.loses === a.points.loses) {
-                        return b.points.loses - a.points.loses
-                    }
-                    return b.points.ties - a.points.ties
-                }
-                return b.points.wins - a.points.wins
+
+                const pointsForAWin = 3
+                const pointsForATie = 1
+
+                let pointsA = a.points.wins * pointsForAWin + a.points.ties * pointsForATie;
+                let pointsB = b.points.wins * pointsForAWin + b.points.ties * pointsForATie;
+
+                return pointsB - pointsA
             });
     }
 
