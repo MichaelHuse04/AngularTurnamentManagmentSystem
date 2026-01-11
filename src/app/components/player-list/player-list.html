@@ -1,19 +1,22 @@
-<button (click)="hidePlayerList.emit()">X</button>
-<h1>Spielerliste</h1>
-@if (!gameHasStarted) {
-    <input id="add-player-input" name="add-player-input" #addPlayerInput
-           (keyup.enter)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">
-    <button (click)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">Add Player</button>
-}
+<div class="player-list-panel">
+    <button (click)="hidePlayerList.emit()" class="hide-player-list-button"> << </button>
 
-<p>Spieler anzahl: <b>{{ playerCount }}</b></p>
-
-@if (playerCount === 0) {
-    <button (click)="addMockPlayer()">add mock players</button>
-}
-
-<ul>
-    @for (player of this.playerList; track $index) {
-        <li (click)="removePlayer($index)">{{ player.name }} ({{player.points.wins}}/{{player.points.loses}}/{{player.points.ties}}) ({{player.state}})</li>
+    <span class="player-list-header">Spielerliste</span>
+    @if (!gameHasStarted) {
+        <input id="add-player-input" name="add-player-input" #addPlayerInput
+               (keyup.enter)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">
+        <button (click)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">Add Player</button>
     }
-</ul>
+
+    <p>Spieler anzahl: <b>{{ playerCount }}</b></p>
+
+    @if (playerCount === 0) {
+        <button (click)="addMockPlayer()">add mock players</button>
+    }
+
+    <ul>
+        @for (player of this.playerList; track $index) {
+            <li (click)="removePlayer($index)">{{ player.name }} ({{player.points.wins}}/{{player.points.loses}}/{{player.points.ties}}) ({{player.state}})</li>
+        }
+    </ul>
+</div>

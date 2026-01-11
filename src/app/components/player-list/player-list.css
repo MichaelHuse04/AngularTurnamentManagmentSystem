@@ -1,0 +1,15 @@
+
+.player-list-panel{
+    position: relative;
+}
+.hide-player-list-button {
+    position: absolute;
+    right: 0;
+    font-size: 3rem;
+    padding: 0.5rem;
+}
+
+.player-list-header {
+    font-size: 2rem;
+    font-weight: bold;
+}
