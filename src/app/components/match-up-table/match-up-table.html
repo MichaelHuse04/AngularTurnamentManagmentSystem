@@ -29,6 +29,16 @@
             @if ($index + 1 !== matchUpSize) {
               <td><b>VS.</b></td>
             }
+              @for (_emptyPlayerSlot of [].constructor(matchUpSize - playerList.players.length); track $index){
+                <td class="empty-player-slot"></td>
+                <td class="empty-player-slot"></td>
+
+                  @if ($index + 1 === matchUpSize - playerList.players.length) {
+                      <td><button (click)="tiePlayers(playerList.players)">Tie</button></td>
+                      <td><button (click)="resetPlayers(playerList.players)">Reset</button></td>
+                  }
+              }
+
             @if ($index + 1 === matchUpSize) {
               <td><button (click)="tiePlayers(playerList.players)">Tie</button></td>
               <td><button (click)="resetPlayers(playerList.players)">Reset</button></td>

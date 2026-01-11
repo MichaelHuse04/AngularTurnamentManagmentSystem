@@ -1,16 +1,19 @@
 <main [className]="isDisabled">
-  <label for="round-amount-input" >Anzahl an runden: </label>
-  <input
-    name="round-amount-input"
-    id="round-amount-input"
-    type="number"
-    min="2"
-    [value]="amountOfMatches"
-    [disabled]="disableRoundAmountInput"
-    (change)="setAmountOfMatches(parseInt(roundAmountInput.value))"
-    #roundAmountInput
-  >
-  <br>
-  <label for="until-one-player-has-a-lead-input">Spielen bis es einen klaren Sieger gibt</label>
-  <input type="checkbox" name="until-one-player-has-a-lead-input" id="until-one-player-has-a-lead-input" (click)="toggleRoundAmountInput()">
+    <label for="round-amount-input">Anzahl an runden: </label>
+    <input
+            name="round-amount-input"
+            id="round-amount-input"
+            type="number"
+            min="2"
+            [value]="amountOfMatches"
+            [disabled]="calculateAmountOfMatches || gameHasStarted"
+            (change)="setAmountOfMatches(parseInt(roundAmountInput.value))"
+            #roundAmountInput
+    >
+    <br>
+    <label for="until-one-player-has-a-lead-input">Spielen bis es einen klaren Sieger gibt</label>
+    <input type="checkbox" name="until-one-player-has-a-lead-input" id="until-one-player-has-a-lead-input"
+           (click)="toggleRoundAmountInput()"
+           [disabled]="gameHasStarted">
+    <span>(doesn't work yet)</span>
 </main>

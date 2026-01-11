@@ -34,7 +34,7 @@
                         <div [class]="`round-status-${round.status}`">
                             <app-finished-match-up-table [matchUpList]="round.matchUpList"
                                                          [round]="$index + 1"
-                                                         [canBeEdited]="roundList[$index + 1] ? roundList[$index + 1].status === RoundStatus.RUNNING : false "></app-finished-match-up-table>
+                                                         [canBeEdited]="true"></app-finished-match-up-table>
                         </div>
                     }
 
@@ -44,11 +44,9 @@
     </main>
 
     <section class="start-section">
-        current round {{ this.gameManagerService.currentRound }}
         @if (!gameHasStarted()) {
             <button [disabled]="gameManagerService.getPlayers().length < 3" (click)="startGame()">Spiel Starten!
             </button>
-            {{ gameManagerService.getAmountOfMatches() }}
         }
     </section>
 </div>

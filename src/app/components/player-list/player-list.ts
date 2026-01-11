@@ -15,6 +15,9 @@ export class PlayerList {
     gameManagerService = inject(GameManagerService)
 
 
+    get gameHasStarted(): boolean {
+        return this.gameManagerService.gameHasStarted();
+    }
 
     get playerCount(): number {
         return this.gameManagerService.getPlayers().length;

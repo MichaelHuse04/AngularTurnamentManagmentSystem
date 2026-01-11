@@ -11,10 +11,14 @@ export class ControllPanel {
 
   @Input() isDisabled = false;
   gameManagerService = inject(GameManagerService);
-  disableRoundAmountInput = false;
+   calculateAmountOfMatches = false;
 
   get amountOfMatches(): number {
     return this.gameManagerService.getAmountOfMatches()
+  }
+
+  get gameHasStarted(): boolean {
+      return this.gameManagerService.gameHasStarted();
   }
 
   setAmountOfMatches(number:number){
@@ -22,7 +26,7 @@ export class ControllPanel {
   }
 
   toggleRoundAmountInput() {
-    this.disableRoundAmountInput = !this.disableRoundAmountInput;
+    this.calculateAmountOfMatches = !this.calculateAmountOfMatches;
     this.gameManagerService.toggleShouldCalculateAmountOfMatches();
   }
 

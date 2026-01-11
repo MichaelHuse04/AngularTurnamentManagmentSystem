@@ -22,10 +22,6 @@ export class MatchUpTable {
     return this.gameManagerService.getMatchUpSize();
   }
 
-  get canGenerateMatchUp(): boolean {
-    return this.gameManagerService.canGenerateMatchUp();
-  }
-
   finishRound(): void {
     this.gameManagerService.startNextRound();
   }

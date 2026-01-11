@@ -1,8 +1,10 @@
 <button (click)="hidePlayerList.emit()">X</button>
 <h1>Spielerliste</h1>
-<input id="add-player-input" name="add-player-input" #addPlayerInput
-       (keyup.enter)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">
-<button (click)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">Add Player</button>
+@if (!gameHasStarted) {
+    <input id="add-player-input" name="add-player-input" #addPlayerInput
+           (keyup.enter)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">
+    <button (click)="addPlayer(addPlayerInput.value); addPlayerInput.value = ''">Add Player</button>
+}
 
 <p>Spieler anzahl: <b>{{ playerCount }}</b></p>
 
