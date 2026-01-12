@@ -1,52 +1,57 @@
 <div [class]="`main main-${showPlayerList ? 'with' : 'without'}-players`">
-    <section class="controls">
-        <app-controll-panel [isDisabled]="gameHasStarted()"></app-controll-panel>
-    </section>
-    <aside>
-        @if (showPlayerList) {
-            <div class="players-tab">
-                <app-player-list [isDisabled]="gameHasStarted()"
-                                 (hidePlayerList)="showPlayerList = false"></app-player-list>
+  <section class="controls">
+    <app-controll-panel [isDisabled]="gameHasStarted"></app-controll-panel>
+  </section>
+  <aside>
+    @if (showPlayerList) {
+      <div class="players-tab">
+        <app-player-list (hidePlayerList)="showPlayerList = false"
+                         [isDisabled]="gameHasStarted"></app-player-list>
+      </div>
+    }
+  </aside>
+  <main class="match-ups">
+    @if (!showPlayerList) {
+      <span class="open-players-tab">
+                <button (click)="showPlayerList = true" class="open-players-tab-button"> >></button>
+            </span>
+    }
+
+    <span class="match-up-header-text">Alle MatchUps werden hier angezeigt</span>
+
+    @for (round of roundList; track $index) {
+      @if (round.status !== RoundStatus.WAITING_TO_START) {
+
+        <details [open]="round.status === RoundStatus.RUNNING">
+          <summary>round <b>
+            {{ round.id }}/{{ roundList.length }}</b>
+            {{ roundList.length - 1 === $index ? "(Letzte Runde)" : null }}
+          </summary>
+          @if (round.status === RoundStatus.RUNNING) {
+            <div [class]="`round-status-${round.status}`">
+              <app-match-up-table [isLastRound]="gameManagerService.isLastRound(round.id)"
+                                  [matchUpList]="round.matchUpList"
+                                  [roundStatus]="round.status"
+                                  [round]="$index + 1"></app-match-up-table>
             </div>
-        }
-    </aside>
-    <main class="match-ups">
-        @if (!showPlayerList) {
-            <button class="open-players-tab-button" (click)="showPlayerList = true"> >></button>
-        }
+          }
+          @if (round.status === RoundStatus.FINISHED) {
+            <div [class]="`round-status-${round.status}`">
+              <app-finished-match-up-table [canBeEdited]="true"
+                                           [matchUpList]="round.matchUpList"
+                                           [round]="$index + 1"></app-finished-match-up-table>
+            </div>
+          }
 
-        <span class="match-up-header-text">Alle MatchUps werden hier angezeigt</span>
+        </details>
+      }
+    }
+  </main>
 
-        @for (round of roundList; track $index) {
-            @if (round.status !== RoundStatus.WAITING_TO_START) {
-
-                <details [open]="round.status === RoundStatus.RUNNING">
-                    <summary>round <b>
-                        {{ round.roundId }}/{{ roundList.length }}</b> {{ roundList.length - 1 === $index ? "(Letzte Runde)" : null }}
-                    </summary>
-                    @if (round.status === RoundStatus.RUNNING) {
-                        <div [class]="`round-status-${round.status}`">
-                            <app-match-up-table [matchUpList]="round.matchUpList" [round]="$index + 1"
-                                                [roundStatus]="round.status"></app-match-up-table>
-                        </div>
-                    }
-                    @if (round.status === RoundStatus.FINISHED) {
-                        <div [class]="`round-status-${round.status}`">
-                            <app-finished-match-up-table [matchUpList]="round.matchUpList"
-                                                         [round]="$index + 1"
-                                                         [canBeEdited]="true"></app-finished-match-up-table>
-                        </div>
-                    }
-
-                </details>
-            }
-        }
-    </main>
-
-    <section class="start-section">
-        @if (!gameHasStarted()) {
-            <button [disabled]="gameManagerService.getPlayers().length < 3" (click)="startGame()">Spiel Starten!
-            </button>
-        }
-    </section>
+  <section class="start-section">
+    @if (!gameHasStarted) {
+      <button (click)="startGame()" [disabled]="gameManagerService.getPlayers().length < 3">Spiel Starten!
+      </button>
+    }
+  </section>
 </div>

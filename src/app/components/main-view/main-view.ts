@@ -27,7 +27,8 @@ export class MainView {
         this.gameManagerService.startGame();
     }
 
-    gameHasStarted() {
+
+    get gameHasStarted() {
         return this.gameManagerService.gameHasStarted()
     }
 

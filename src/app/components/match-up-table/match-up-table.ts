@@ -12,25 +12,31 @@ import {Player, PlayerStatus, Uuid} from '../../model/player';
 })
 export class MatchUpTable {
 
-  protected readonly RoundStatus = RoundStatus;
   gameManagerService = inject(GameManagerService)
   @Input() round: number = -1
   @Input() roundStatus: RoundStatus = RoundStatus.WAITING_TO_START;
   @Input() matchUpList: MatchUp[] = []
+  @Input() isLastRound: boolean = false;
+  protected readonly RoundStatus = RoundStatus;
+  protected readonly parseInt = parseInt;
 
-    get amountOfPlayer(): number {
-      return this.gameManagerService.getPlayers().length; // TODO
-    }
+  get amountOfPlayer(): number {
+    return this.gameManagerService.getPlayers().length; // TODO
+  }
 
   get matchUpSize(): number {
     return this.gameManagerService.getMatchUpSize();
+  }
+
+  finishGame(): void {
+    this.gameManagerService.finishGame();
   }
 
   finishRound(): void {
     this.gameManagerService.startNextRound();
   }
 
-  processMatchResult( wonPlayerId: Uuid, matchUp: MatchUp): void {
+  processMatchResult(wonPlayerId: Uuid, matchUp: MatchUp): void {
     matchUp.players.forEach((player: Player) => {
       if (wonPlayerId === player.id) {
         player.state = PlayerStatus.WON
@@ -54,10 +60,9 @@ export class MatchUpTable {
 
   validatePlayers(): boolean {
     return this.matchUpList.every((matchUp: MatchUp) => {
-      return matchUp.players.every(( player: Player) => { return player.state !== PlayerStatus.NONE})
+      return matchUp.players.every((player: Player) => {
+        return player.state !== PlayerStatus.NONE
+      })
     })
   }
-
-
-    protected readonly parseInt = parseInt;
 }

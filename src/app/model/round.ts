@@ -1,20 +1,19 @@
 import {MatchUp} from './matchUp';
 
-
 export class Round {
   matchUpList: MatchUp[];
-  roundId: number;
+  id: number;
   status: RoundStatus = RoundStatus.WAITING_TO_START
 
   constructor(matchUpList: MatchUp[], roundId: number) {
     this.matchUpList = matchUpList;
-    this.roundId = roundId;
+    this.id = roundId;
   }
 }
 
 export enum RoundStatus {
   WAITING_TO_START = "waitingToStart",
   PAUSED = "paused",
-  RUNNING= "running",
+  RUNNING = "running",
   FINISHED = "finished",
 }
